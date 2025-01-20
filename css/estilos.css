@@ -1,0 +1,87 @@
+body{ 
+    background: linear-gradient(-90deg, rgb(1, 126, 78), rgb(3, 252, 57), rgb(1, 126, 78));
+}
+
+.container{
+    margin-top: 9em;
+}
+
+.container2{
+    margin-top: 2em;
+}
+
+h2{
+ font-family: "Merriweather Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 3em;
+  letter-spacing: 0.1em;
+  color: rgb(0, 94, 28);
+}
+
+h3{
+    font-family: "Merriweather Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2.7em;
+    letter-spacing: 0.05em; 
+    color: rgb(0, 94, 28);
+}
+
+h4{
+    font-family: "Merriweather Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2em;
+    letter-spacing: 0.02em; 
+    color: rgb(0, 94, 28);
+}
+
+.white{
+    background-color: whitesmoke;
+}
+
+.icon1{
+    padding-left: 2em;
+}
+
+.col{
+    display: inline-block;
+}
+
+p{
+    font-family: "Outfit", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.8em;
+}
+input, button{
+    border: rgb(3, 134, 43) solid;
+}
+
+button{
+    background-color: rgb(3, 134, 43);
+}
+
+button:hover{
+    background-color:  rgb(1, 170, 52);
+    border: rgb(1, 170, 52) solid;
+}
+
+.p1{
+    font-size: 1.5em;
+}
+
+.colPresu{
+    background-color: rgb(142, 253, 157);
+}
+
+.filatitulo{
+    background-color: rgba(102, 201, 115, 0.911);
+}
+
+
