@@ -4,42 +4,51 @@ function crear_gasto() {
     let nombre_gasto = document.getElementById('nombre_gasto').value;
     let cantidad_gasto = document.getElementById('cantidad_gasto').value;
 
-    // Validate input
+    // Validar que el input este lleno
     if (!nombre_gasto || !cantidad_gasto) {
         alert("Por favor, complete todos los campos.");
         return;
     }
 
-    // Create a new row in the table
+    // Crear nueva fila
     let table = document.querySelector('.gastos');
-    let newRow = table.insertRow();
+    let nuevaFila = table.insertRow();
 
-    // Insert cells for name, amount, edit icon, and delete icon
-    let cellNombre = newRow.insertCell(0);
-    let cellCantidad = newRow.insertCell(1);
-    let cellEditar = newRow.insertCell(2);
-    let cellEliminar = newRow.insertCell(3);
+    // Insertar celdas en la nueva fila
+    let cellNombre = nuevaFila.insertCell(0);
+    let cellCantidad = nuevaFila.insertCell(1);
+    let cellEditar = nuevaFila.insertCell(2);
+    let cellEliminar = nuevaFila.insertCell(3);
 
     cellNombre.textContent = nombre_gasto;
     cellCantidad.textContent = cantidad_gasto;
 
-    // Create edit icon
+    // Crear el botón de editar
     let editIcon = document.createElement('span');
-    editIcon.innerHTML = '✏️'; // You can replace this with an actual icon
+    editIcon.innerHTML = '✏️';
     cellEditar.appendChild(editIcon);
 
-    // Create delete icon
-    let deleteIcon = document.createElement('span');
-    deleteIcon.innerHTML = '🗑️'; // You can replace this with an actual icon
-    deleteIcon.onclick = function() {
-        table.deleteRow(newRow.rowIndex);
+    // Crear botón de eliminar
+    let boton_eliminar = document.createElement('span');
+    boton_eliminar.innerHTML = '🗑️'; 
+    boton_eliminar.onclick = function() {
+        table.deleteRow(nuevaFila.rowIndex);
     };
-    cellEliminar.appendChild(deleteIcon);
+    cellEliminar.appendChild(boton_eliminar);
 
-    // Clear input fields
+    // limpiar inputs
     document.getElementById('nombre_gasto').value = '';
     document.getElementById('cantidad_gasto').value = '';
 }
 
-// Attach the crear_gasto function to the button
+// asignarle la funcion crear_gasto al botón
 document.getElementById('boton_guardar_gasto').addEventListener('click', crear_gasto);
+
+//agregar presupuesto inicial
+
+let presupuesto_inicial = localStorage.getItem('presupuesto');
+let span_valor=document.getElementById('valor_presupuesto_inicial');
+// let presupuesto=presupuesto_inicial.value;
+
+console.log(presupuesto_inicial);
+span_valor.textContent=presupuesto_inicial;

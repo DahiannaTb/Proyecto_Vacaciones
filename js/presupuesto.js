@@ -13,6 +13,8 @@ boton_continuar.addEventListener('click', () => {
         alert("Por favor, ingrese un presupuesto válido.");
     } else {
         // Navigate to the next page
-        window.location.href = "principal.html"; // Adjust the path if necessary
+        window.location.href = "principal.html"; 
     }
+
+    localStorage.setItem('presupuesto', presupuesto);
 });
