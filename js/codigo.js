@@ -39,6 +39,13 @@ function crear_gasto() {
     // limpiar inputs
     document.getElementById('nombre_gasto').value = '';
     document.getElementById('cantidad_gasto').value = '';
+
+    nuevaFila.classList.add('fila_gasto');
+    cellNombre.classList.add('nombre_gasto');
+    cellCantidad.classList.add('cantidad_gasto');
+    cellEditar.classList.add('editar_gasto');
+    cellEliminar.classList.add('eliminar_gasto');
+
 }
 
 // asignarle la funcion crear_gasto al botón
