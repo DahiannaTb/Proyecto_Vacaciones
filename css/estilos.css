@@ -108,6 +108,17 @@ button:hover{
     border-left: solid 2px green;
 }
 
+.presupuestos_container{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .gastos{
     margin: 15px auto;
+}
+
+.restante{
+    background-color: rgb(60, 195, 87);
 }
