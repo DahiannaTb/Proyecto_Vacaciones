@@ -1,9 +1,13 @@
-//en estast variables se almacenan lo que son: el nombre de gasto y la cantidad
-//ya que como hay que tene en cuenta si se registra el mismo tipo de gasto con otro monto, 
-//se debe almacenar NO en una nueva fila sino en la misma fila pero con un nuevo monto.
-let nombres_gastos=[]
-let cantidades_gastos=[]
+//en esta variable voy a poner el acumulador de la cantidad de los gastos totales
+let acumulador_gastos_totales=0
 
+//agregar presupuesto inicial
+
+let presupuesto_inicial = localStorage.getItem('presupuesto');
+let span_valor_inicial=document.getElementById('valor_presupuesto_inicial');
+let span_valor_restante=document.getElementById('valor_presupuesto_restante');
+span_valor_restante.textContent=presupuesto_inicial-acumulador_gastos_totales;
+span_valor_inicial.textContent=presupuesto_inicial;
 
 // Function para crear cada fila de un nuevo gasto
 function crear_gasto() {
@@ -71,17 +75,14 @@ function crear_gasto() {
     // Limpiar los inputs
     document.getElementById('nombre_gasto').value = '';
     document.getElementById('cantidad_gasto').value = '';
+    
+
+    //actualizar presupuesto actual
+    acumulador_gastos_totales=acumulador_gastos_totales+cantidad_gasto;
+    span_valor_restante.textContent=presupuesto_inicial-acumulador_gastos_totales;
+
 }
 
 
 // asignarle la funcion crear_gasto al botón
 document.getElementById('boton_guardar_gasto').addEventListener('click', crear_gasto);
-
-//agregar presupuesto inicial
-
-let presupuesto_inicial = localStorage.getItem('presupuesto');
-let span_valor=document.getElementById('valor_presupuesto_inicial');
-// let presupuesto=presupuesto_inicial.value;
-
-console.log(presupuesto_inicial);
-span_valor.textContent=presupuesto_inicial;
