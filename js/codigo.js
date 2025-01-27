@@ -1,19 +1,18 @@
 //en esta variable voy a poner el acumulador de la cantidad de los gastos totales
-let acumulador_gastos_totales=0
+let acumulador_gastos_totales = 0;
 
 //agregar presupuesto inicial
-
 let presupuesto_inicial = localStorage.getItem('presupuesto');
-let span_valor_inicial=document.getElementById('valor_presupuesto_inicial');
-let span_valor_restante=document.getElementById('valor_presupuesto_restante');
-span_valor_restante.textContent=presupuesto_inicial-acumulador_gastos_totales;
-span_valor_inicial.textContent=presupuesto_inicial;
+let span_valor_inicial = document.getElementById('valor_presupuesto_inicial');
+let span_valor_restante = document.getElementById('valor_presupuesto_restante');
+span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
+span_valor_inicial.textContent = presupuesto_inicial;
 
 // Function para crear cada fila de un nuevo gasto
 function crear_gasto() {
     let nombre_gasto = document.getElementById('nombre_gasto').value.trim();
     let cantidad_gasto = parseInt(document.getElementById('cantidad_gasto').value.trim());
-    
+
     // Validar que los campos estén completos y cantidad sea un número válido
     if (!nombre_gasto || isNaN(cantidad_gasto)) {
         alert("Por favor, complete todos los campos correctamente.");
@@ -39,7 +38,7 @@ function crear_gasto() {
     }
 
     // Si el gasto no existe, crear una nueva fila
-    if (gastoExiste===false) {
+    if (!gastoExiste) {
         let nuevaFila = table.insertRow();
 
         // Insertar celdas en la nueva fila
@@ -58,8 +57,12 @@ function crear_gasto() {
 
         // Crear botón de eliminar
         let boton_eliminar = document.createElement('span');
-        boton_eliminar.innerHTML = '🗑️'; 
+        boton_eliminar.innerHTML = '🗑️';
         boton_eliminar.onclick = function() {
+            // Restar la cantidad del gasto eliminado al acumulador de gastos totales
+            acumulador_gastos_totales -= parseInt(cellCantidad.textContent);
+            // Actualizar el presupuesto restante
+            span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
             table.deleteRow(nuevaFila.rowIndex);
            // acumulador_gastos_totales=acumulador_gastos_totales-cantidad_gasto;
             span_valor_restante.textContent=(presupuesto_inicial-acumulador_gastos_totales)+cantidad_gasto;
@@ -77,14 +80,11 @@ function crear_gasto() {
     // Limpiar los inputs
     document.getElementById('nombre_gasto').value = '';
     document.getElementById('cantidad_gasto').value = '';
-    
 
-    //actualizar presupuesto actual
-    acumulador_gastos_totales=acumulador_gastos_totales+cantidad_gasto;
-    span_valor_restante.textContent=presupuesto_inicial-acumulador_gastos_totales;
-
+    // Actualizar presupuesto actual
+    acumulador_gastos_totales += cantidad_gasto;
+    span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
 }
 
-
-// asignarle la funcion crear_gasto al botón
+// Asignarle la función crear_gasto al botón
 document.getElementById('boton_guardar_gasto').addEventListener('click', crear_gasto);
