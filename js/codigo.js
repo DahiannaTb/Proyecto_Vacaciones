@@ -19,6 +19,12 @@ function crear_gasto() {
         return;
     }
 
+    // Verificar si el gasto a ingresar es mayor al presupuesto restante
+    if (cantidad_gasto > (presupuesto_inicial - acumulador_gastos_totales)) {
+        alert("El gasto a ingresar supera el presupuesto restante.");
+        return;
+    }
+
     let table = document.querySelector('.gastos');
     let filas = table.getElementsByClassName('fila_gasto');
     let gastoExiste = false;
@@ -64,8 +70,6 @@ function crear_gasto() {
             // Actualizar el presupuesto restante
             span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
             table.deleteRow(nuevaFila.rowIndex);
-           // acumulador_gastos_totales=acumulador_gastos_totales-cantidad_gasto;
-            span_valor_restante.textContent=(presupuesto_inicial-acumulador_gastos_totales)+cantidad_gasto;
         };
         cellEliminar.appendChild(boton_eliminar);
 
