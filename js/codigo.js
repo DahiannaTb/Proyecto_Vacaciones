@@ -61,8 +61,6 @@ function crear_gasto() {
         boton_eliminar.innerHTML = '🗑️'; 
         boton_eliminar.onclick = function() {
             table.deleteRow(nuevaFila.rowIndex);
-           // acumulador_gastos_totales=acumulador_gastos_totales-cantidad_gasto;
-            span_valor_restante.textContent=(presupuesto_inicial-acumulador_gastos_totales)+cantidad_gasto;
         };
         cellEliminar.appendChild(boton_eliminar);
 
