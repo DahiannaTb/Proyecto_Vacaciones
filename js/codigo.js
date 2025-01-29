@@ -90,5 +90,14 @@ function crear_gasto() {
     span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
 }
 
+//modificar presupuesto inicial
+//agregar valor del presupuesto inicial al span en la ventana emergente
+const span_presupuesto_inicial = document.getElementById('span_presupuesto_inicial');
+span_presupuesto_inicial.textContent = presupuesto_inicial;
+
+//traer input de presupuesto nuevo
+const input_nuevo_presupuesto = document.getElementById('input_nuevo_presupuesto');
+
+
 // Asignarle la función crear_gasto al botón
 document.getElementById('boton_guardar_gasto').addEventListener('click', crear_gasto);
