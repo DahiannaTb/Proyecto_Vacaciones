@@ -94,6 +94,9 @@ function crear_gasto() {
 const span_presupuesto_inicial = document.getElementById('span_presupuesto_inicial');
 span_presupuesto_inicial.textContent = presupuesto_inicial;
 
+//variable global de nuevo presupuesto
+// let nuevo_presupuesto = parseInt(document.getElementById('nuevo_presupuesto').value.trim());
+
 
 // Función para confirmar el cambio de presupuesto
 function confirmar_cambio_presupuesto() {
@@ -105,8 +108,19 @@ function confirmar_cambio_presupuesto() {
         return;
     }
 
-    // Actualizar el presupuesto inicial
+    if (acumulador_gastos_totales>nuevo_presupuesto){
+        const ventana_presupuesto_modificado=document.querySelector('.ventana_presupuesto_modificado');
+        const h3_presupuesto_modificado=document.querySelector('.h3_presupuesto_modificado')
+        h3_presupuesto_modificado.style.display='none';
+        const h4_presupuesto_no_modificado=document.createElement('h4');
+        h4_presupuesto_no_modificado.textContent='No hay suficiente presupuesto para realizar el cambio';
+        h4_presupuesto_no_modificado.style.color='red';
+        ventana_presupuesto_modificado.appendChild(h4_presupuesto_no_modificado);
+        
+    }else{
+            // Actualizar el presupuesto inicial
     presupuesto_inicial = nuevo_presupuesto;
+    span_presupuesto_inicial.textContent = presupuesto_inicial;
     span_valor_inicial.textContent = presupuesto_inicial;
     span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
 
@@ -115,6 +129,7 @@ function confirmar_cambio_presupuesto() {
 
     // Limpiar el input de nuevo presupuesto
     document.getElementById('nuevo_presupuesto').value = '';
+    }
 }
 
 // Asignar la función crear_gasto al botón de guardar gasto que trajimos de la web principal 
