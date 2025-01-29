@@ -90,14 +90,35 @@ function crear_gasto() {
     span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
 }
 
-//modificar presupuesto inicial
 //agregar valor del presupuesto inicial al span en la ventana emergente
 const span_presupuesto_inicial = document.getElementById('span_presupuesto_inicial');
 span_presupuesto_inicial.textContent = presupuesto_inicial;
 
-//traer input de presupuesto nuevo
-const input_nuevo_presupuesto = document.getElementById('input_nuevo_presupuesto');
 
+// Función para confirmar el cambio de presupuesto
+function confirmar_cambio_presupuesto() {
+    let nuevo_presupuesto = parseInt(document.getElementById('nuevo_presupuesto').value.trim());
 
-// Asignarle la función crear_gasto al botón
+    // Validar que el nuevo presupuesto sea un número válido
+    if (isNaN(nuevo_presupuesto) || nuevo_presupuesto <= 0) {
+        alert("Por favor, ingrese un presupuesto válido.");
+        return;
+    }
+
+    // Actualizar el presupuesto inicial
+    presupuesto_inicial = nuevo_presupuesto;
+    span_valor_inicial.textContent = presupuesto_inicial;
+    span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
+
+    // Guardar el nuevo presupuesto en localStorage
+    localStorage.setItem('presupuesto', presupuesto_inicial);
+
+    // Limpiar el input de nuevo presupuesto
+    document.getElementById('nuevo_presupuesto').value = '';
+}
+
+// Asignar la función crear_gasto al botón de guardar gasto que trajimos de la web principal 
 document.getElementById('boton_guardar_gasto').addEventListener('click', crear_gasto);
+
+// Asignar la función confirmar_cambio_presupuesto al botón de confrimar cambio que trajimos de la principal
+document.getElementById('boton_confirmar_cambio').addEventListener('click', confirmar_cambio_presupuesto);
