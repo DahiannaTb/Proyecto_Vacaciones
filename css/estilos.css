@@ -84,4 +84,41 @@ button:hover{
     background-color: rgba(102, 201, 115, 0.911);
 }
 
+.fila_gasto{
+    background-color: white;
+    border: 2px solid rgb(2, 104, 24);
+    margin-top: 30px;
+}
 
+.cantidad_gasto{
+    background-color: rgb(100, 199, 100);
+    font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 100px;
+}
+
+.nombre_gasto{
+   padding: 5px 15px 5px 5px;
+}
+
+.editar_gasto, .eliminar_gasto{
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+    border-left: solid 2px green;
+}
+
+.presupuestos_container{
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.gastos{
+    margin: 15px auto;
+}
+
+.restante{
+    background-color: rgb(60, 195, 87);
+}
