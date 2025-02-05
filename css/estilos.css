@@ -122,3 +122,80 @@ button:hover{
 .restante{
     background-color: rgb(60, 195, 87);
 }
+
+/* Estilo para el icono de edición */
+.edit-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
+/* Estilos para la ventana emergente (popup) */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+/* Estilo para el campo de texto dentro del popup */
+.popup-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+
+/* Estilo para los botones dentro del popup */
+.popup-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    margin-top: 10px;
+    
+}
+
+.popup-button:hover {
+    background-color: #028835;
+    color: white;
+}
+
+.popup-button:active {
+    background-color: #0056b3;
+}
+
+/* .m-container{
+    display: flex;
+    background-color: rgb(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 40em;
+    
+    
+    
+}
+
+.Modal{
+    background-color: white;
+    width: 600px;
+    padding: 30px 50px;
+} */

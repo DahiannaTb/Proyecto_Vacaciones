@@ -60,6 +60,54 @@ function crear_gasto() {
         let editIcon = document.createElement('span');
         editIcon.innerHTML = '✏️';
         cellEditar.appendChild(editIcon);
+        editIcon.onclick = function(){
+            let popup = document.createElement('div');
+            popup.classList.add('popup');  // Se añade una clase para el popup
+             // Campo de texto para modificar el valor
+            let input = document.createElement('input');
+            let input2 = document.createElement('input')
+            input.value = cellNombre.innerText;  //Uso el valor actual de la celda con el innerText
+            input2.value = cellCantidad.innerText;
+            input.classList.add('popup-input');
+            input2.classList.add('popup-input');
+              //Se añade una clase para el input
+              // Botón para guardar los cambios
+            let btn_guardar = document.createElement('button');
+            btn_guardar.innerText = 'Guardar';
+            btn_guardar.classList.add('popup-button');  // Clase para el botón
+            
+            // Función para guardar los cambios
+            btn_guardar.onclick = function() {
+                cellNombre.innerText = input.value; // Modificar el valor de la celda
+                cellCantidad.innerText = input2.value;
+                if(parseInt(input2.value) > cantidad_gasto){
+                    // Actualizar el presupuesto restante
+                    span_valor_restante.textContent = presupuesto_inicial - parseInt(input2.value);
+                }
+                document.body.removeChild(popup);   // Cerrar el popup
+            };
+
+            // Botón para cancelar y cerrar el popup
+            let btn_cancelar = document.createElement('button');
+            btn_cancelar.innerText = 'Cancelar';
+            btn_cancelar.classList.add('popup-button');  // Clase para el botón
+            btn_cancelar.style.marginLeft = '10px';
+
+            // Función para cerrar el popup sin hacer cambios
+            btn_cancelar.onclick = function() {
+                document.body.removeChild(popup); // Cerrar el popup sin hacer cambios
+            };
+
+            // Agregar los elementos al popup
+            popup.appendChild(input);
+            popup.appendChild(input2);
+            popup.appendChild(btn_guardar);
+            popup.appendChild(btn_cancelar);
+            
+            // Agregar el popup al body del documento
+            document.body.appendChild(popup);
+
+        };
 
         // Crear botón de eliminar
         let boton_eliminar = document.createElement('span');
