@@ -2,14 +2,22 @@
 let acumulador_gastos_totales = 0;
 
 //agregar presupuesto inicial
+//el presupuesto inicial se trae desde el local storage que fue anteriormente guardado allí
 let presupuesto_inicial = localStorage.getItem('presupuesto');
+//en estas variables se guardan los span mediante los cualles se muestra el presupuesto
+//inicial y el restante
 let span_valor_inicial = document.getElementById('valor_presupuesto_inicial');
 let span_valor_restante = document.getElementById('valor_presupuesto_restante');
+
+//en estas variables se guardan los valores que tendrán los span mediante los 
+// cuales se muestra el gasto total y el restante
 span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
 span_valor_inicial.textContent = presupuesto_inicial;
 
 // Function para crear cada fila de un nuevo gasto
 function crear_gasto() {
+    // se obtiene el valor del input del nombre del gasto y cantidad del mismo 
+    // y se agrega .trim para eliminar los posibles espacios en blanco
     let nombre_gasto = document.getElementById('nombre_gasto').value.trim();
     let cantidad_gasto = parseInt(document.getElementById('cantidad_gasto').value.trim());
 
@@ -25,6 +33,7 @@ function crear_gasto() {
         return;
     }
 
+    //en la variable table se almacena la tabla creada en el html principal
     let table = document.querySelector('.gastos');
     let filas = table.getElementsByClassName('fila_gasto');
     let gastoExiste = false;
@@ -44,7 +53,7 @@ function crear_gasto() {
     }
 
     // Si el gasto no existe, crear una nueva fila
-    if (!gastoExiste) {
+    if (gastoExiste===false) {
         let nuevaFila = table.insertRow();
 
         // Insertar celdas en la nueva fila
@@ -60,54 +69,69 @@ function crear_gasto() {
         let editIcon = document.createElement('span');
         editIcon.innerHTML = '✏️';
         cellEditar.appendChild(editIcon);
-        editIcon.onclick = function(){
+        editIcon.onclick = function () {
             let popup = document.createElement('div');
-            popup.classList.add('popup');  // Se añade una clase para el popup
-             // Campo de texto para modificar el valor
-            let input = document.createElement('input');
-            let input2 = document.createElement('input')
-            input.value = cellNombre.innerText;  //Uso el valor actual de la celda con el innerText
-            input2.value = cellCantidad.innerText;
-            input.classList.add('popup-input');
-            input2.classList.add('popup-input');
-              //Se añade una clase para el input
-              // Botón para guardar los cambios
-            let btn_guardar = document.createElement('button');
-            btn_guardar.innerText = 'Guardar';
-            btn_guardar.classList.add('popup-button');  // Clase para el botón
+            popup.classList.add('popup');
+
+            let inputNombre = document.createElement('input');
+            let inputCantidad = document.createElement('input');
+            inputNombre.classList.add('popup-input')
+            inputCantidad.classList.add('popup-input')
+            inputNombre.value = cellNombre.innerText;
+            inputCantidad.value = cellCantidad.innerText;
+            inputCantidad.type = 'number';
+        
+            let btnGuardar = document.createElement('button');
+            btnGuardar.innerText = 'Guardar';
+            btnGuardar.classList.add('popup-button');
             
-            // Función para guardar los cambios
-            btn_guardar.onclick = function() {
-                cellNombre.innerText = input.value; // Modificar el valor de la celda
-                cellCantidad.innerText = input2.value;
-                if(parseInt(input2.value) > cantidad_gasto){
-                    // Actualizar el presupuesto restante
-                    span_valor_restante.textContent = presupuesto_inicial - parseInt(input2.value);
+            let btnCancelar = document.createElement('button');
+            btnCancelar.innerText = 'Cancelar';
+            btnCancelar.classList.add('popup-button');
+
+        
+            btnCancelar.onclick = function () {
+                document.body.removeChild(popup);
+            };
+        
+            btnGuardar.onclick = function () {
+                let nuevoNombre = inputNombre.value.trim();
+                let nuevaCantidad = parseInt(inputCantidad.value.trim());
+                let cantidadOriginal = parseInt(cellCantidad.innerText);
+        
+                if (!nuevoNombre || isNaN(nuevaCantidad) || nuevaCantidad <= 0) {
+                    alert("Ingrese un nombre y una cantidad válida.");
+                    return;
                 }
-                document.body.removeChild(popup);   // Cerrar el popup
+        
+                let presupuesto_restante = presupuesto_inicial - acumulador_gastos_totales + cantidadOriginal;
+        
+                if (nuevaCantidad > presupuesto_restante) {
+                    alert("El gasto editado supera el presupuesto restante.");
+                    return;
+                }
+        
+                // Actualizar acumulador de gastos
+                acumulador_gastos_totales = acumulador_gastos_totales - cantidadOriginal + nuevaCantidad;
+        
+                // Actualizar valores en la tabla
+                cellNombre.innerText = nuevoNombre;
+                cellCantidad.innerText = nuevaCantidad;
+        
+                // Actualizar presupuesto restante
+                span_valor_restante.textContent = presupuesto_inicial - acumulador_gastos_totales;
+        
+                // Cerrar popup
+                document.body.removeChild(popup);
             };
-
-            // Botón para cancelar y cerrar el popup
-            let btn_cancelar = document.createElement('button');
-            btn_cancelar.innerText = 'Cancelar';
-            btn_cancelar.classList.add('popup-button');  // Clase para el botón
-            btn_cancelar.style.marginLeft = '10px';
-
-            // Función para cerrar el popup sin hacer cambios
-            btn_cancelar.onclick = function() {
-                document.body.removeChild(popup); // Cerrar el popup sin hacer cambios
-            };
-
-            // Agregar los elementos al popup
-            popup.appendChild(input);
-            popup.appendChild(input2);
-            popup.appendChild(btn_guardar);
-            popup.appendChild(btn_cancelar);
-            
-            // Agregar el popup al body del documento
+        
+            popup.appendChild(inputNombre);
+            popup.appendChild(inputCantidad);
+            popup.appendChild(btnGuardar);
+            popup.appendChild(btnCancelar);
             document.body.appendChild(popup);
-
         };
+        
 
         // Crear botón de eliminar
         let boton_eliminar = document.createElement('span');
